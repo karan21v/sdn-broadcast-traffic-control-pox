@@ -1,0 +1,21 @@
+Project: Broadcast Traffic Control using Mininet and POX
+
+Scenario 1: Normal connectivity
+Command: h1 ping -c 2 h2
+Expected: Ping succeeds
+Observed: Normal communication works
+
+Scenario 2: Normal broadcast
+Command: h1 arping -c 3 10.0.0.2
+Expected: Broadcast packets are detected and allowed
+Observed: POX logs show broadcast detection and flooding
+
+Scenario 3: Excessive broadcast
+Command: h1 arping -c 10 10.0.0.99
+Expected: Controller detects excessive broadcast and installs drop rule
+Observed: POX logs show LIMIT EXCEEDED and flow table shows priority 100 drop rule
+
+Scenario 4: Flow table validation
+Command: ovs-ofctl dump-flows s1
+Expected: High-priority broadcast drop rule
+Observed: Flow table contains broadcast match rule with no output action
