@@ -392,48 +392,6 @@ This project successfully demonstrates broadcast traffic control using Software 
 
 The project demonstrates key SDN concepts such as controller-switch interaction, packet-in handling, match-action rule design, flow rule installation, and network behavior observation.
 
-## Viva Preparation
-
-### What is SDN?
-
-SDN stands for Software Defined Networking. It separates the control plane from the data plane. The controller makes forwarding decisions, and the switch follows the rules installed by the controller.
-
-### What is broadcast traffic?
-
-Broadcast traffic is traffic sent to all hosts in a local network. The Ethernet broadcast MAC address is `ff:ff:ff:ff:ff:ff`.
-
-### What is ARP?
-
-ARP stands for Address Resolution Protocol. It is used to find the MAC address corresponding to an IP address. ARP requests are broadcast packets.
-
-### Why is excessive broadcast traffic harmful?
-
-Because broadcast packets are flooded to all hosts. Too many broadcast packets waste bandwidth and processing resources.
-
-### How does this project detect broadcast packets?
-
-The controller checks whether the destination MAC address is `ff:ff:ff:ff:ff:ff`.
-
-### How does the controller limit broadcast traffic?
-
-It counts broadcast packets from each source MAC address. If the count exceeds 5 packets in 10 seconds, it installs a drop rule.
-
-### What is packet-in?
-
-Packet-in is an OpenFlow message sent by the switch to the controller when the switch does not know how to handle a packet.
-
-### What is flow mod?
-
-Flow mod is an OpenFlow message used by the controller to install or modify flow rules in the switch.
-
-### What is match-action?
-
-Match-action means the switch matches packet fields such as MAC address or input port and then performs an action such as forward, flood, or drop.
-
-### How is the packet dropped?
-
-The controller installs a flow rule with a match condition but no forwarding action. In OpenFlow, no output action means the packet is dropped.
-
 ## References
 
 - Mininet Overview: https://mininet.org/overview/
